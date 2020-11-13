@@ -3,6 +3,7 @@ import customerService from './api/api';
 
 function App() {
   const [customers, setCustomers] = useState(null);
+  const [newCustomer, setNewCustomer] = useState('');
 
   useEffect(() => {
     if(!customers) {
@@ -11,11 +12,14 @@ function App() {
   })
 
   const getCustomers = async () => {
-    let res = await customerService.getAll();
-    console.log(res);
+    let res = await customerService.getAll(); 
     setCustomers(res);
   }
 
+  const addCustomer = async () => {
+    let res = await customerService.addUser(newCustomer); 
+    console.log(res);
+  }
   const renderCustomer = customer => {
     return (
       <li key={customer.ID} className="list__item customer">
@@ -24,15 +28,36 @@ function App() {
     );
   };
 
+  
+  const mySubmitHandler = event => {
+    event.preventDefault();
+    addCustomer();
+  };
+
+  const handleChange = e => {
+    setNewCustomer( e.target.value );
+  }
+
   return (
     <div className="App">
-      <ul className="list">
-        {(customers && customers.length > 0) ? (
-          customers.map(customer => renderCustomer(customer))
-        ) : (
-          <p>No customers found</p>
-        )}
-      </ul>
+      <div className="customerList">
+        <ul className="list">
+          {(customers && customers.length > 0) ? (
+            customers.map(customer => renderCustomer(customer))
+          ) : (
+            <p>No customers found</p>
+          )}
+        </ul>
+      </div>
+      <div>
+        <form  onSubmit={mySubmitHandler}> 
+          <input name="customername"
+            type='text' 
+            onChange={handleChange}
+          />
+          <input name="sumit" type="submit" value="Add new user"/>
+        </form>
+      </div>
     </div>
   );
 }

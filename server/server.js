@@ -27,4 +27,17 @@ connection.query('SELECT * FROM customers ORDER BY id desc',function(err,rows)  
 });
 }); 
 
+
+app.post(`/api/customers`, async (req, res) => {
+    var user = { id: req.body } 
+    connection.query('INSERT INTO customers SET ?', user, function(err, result) {
+        if (err) {
+            console.error(err);
+        } else {                
+            console.log(res)
+        }
+    })
+  })
+
+
 app.listen(port || 8080);

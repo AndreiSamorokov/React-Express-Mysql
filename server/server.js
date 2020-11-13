@@ -15,4 +15,18 @@ app.get('/', function (req, res) {
     return res.send('pong');
 });
 
+var connection  = require('../lib/db');
+  
+app.get(`/api/customers`, async (req, res) => {
+    console.log('test');
+connection.query('SELECT * FROM customers ORDER BY id desc',function(err,rows)     {
+    if(err){
+        console.error(err);
+    }else{
+        
+        return res.status(200).send(rows);
+    }                    
+});
+}); 
+
 app.listen(port || 8080);

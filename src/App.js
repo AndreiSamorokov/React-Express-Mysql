@@ -3,7 +3,7 @@ import customerService from './api/api';
 
 function App() {
   const [customers, setCustomers] = useState(null);
-  const [newCustomer, setNewCustomer] = useState('');
+  const [newCustomer, setNewCustomer] = useState([]);
 
   useEffect(() => {
     if(!customers) {
@@ -35,7 +35,7 @@ function App() {
   };
 
   const handleChange = e => {
-    setNewCustomer( e.target.value );
+    setNewCustomer( {'name':e.target.value } );
   }
 
   return (

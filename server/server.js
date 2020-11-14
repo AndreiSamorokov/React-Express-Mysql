@@ -27,9 +27,13 @@ connection.query('SELECT * FROM customers ORDER BY id desc',function(err,rows)  
 });
 }); 
 
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 app.post(`/api/customers`, async (req, res) => {
-    var user = { id: req.body } 
+    var user = { name: req.body.name } 
     connection.query('INSERT INTO customers SET ?', user, function(err, result) {
         if (err) {
             console.error(err);

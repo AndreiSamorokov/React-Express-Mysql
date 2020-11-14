@@ -12,5 +12,9 @@ export default {
   removeUser: async(data) => {
     let res = axios.post('/api/customers/remove', data);
     return res.data || [];
-  }  
+  },
+  editUser: async(data) => {
+    let res = axios.post('/api/customers/edit', data);
+    return res.data || [];
+  },
 }

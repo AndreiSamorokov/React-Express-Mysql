@@ -57,5 +57,19 @@ app.post(`/api/customers/remove`, async (req, res) => {
 })
 
 
+app.post(`/api/customers/edit`, async (req, res) => { 
+    var user = [req.body.name, req.body.id]
+    console.log( user );
+    connection.query('UPDATE customers SET name = ? WHERE id = ?', user, function(err, result) {
+        if (err) {
+            return 'error';
+        } else {                  
+            return res.status(200).send(result);
+        }
+    })
+})
+
+
+
 
 app.listen(port || 8080);

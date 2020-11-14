@@ -28,7 +28,7 @@ function App() {
   const updateCustomer = async() => {
     const user = { id: editingItem, name: newCustomer} 
     let res = await customerService.editUser(user);  
-    getCustomers();
+    getCustomers(); 
   }
   
   const DeleteItem = async (cuid) => { 
@@ -72,8 +72,8 @@ function App() {
           onClick={() => EditItem(customer.id, customer.name)}
         >
           {
-            ( editingItem == customer.id ) ? 'Editing' : 'Edit'
-          }
+            ( editingItem === customer.id ) ? 'Editing' : 'Edit'
+          } 
         </button>
 
       </li>

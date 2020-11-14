@@ -8,5 +8,9 @@ export default {
   addUser: async (data) => {
     let res = axios.post('/api/customers', data);
     return res.data || [];
-  }
+  },
+  removeUser: async(data) => {
+    let res = axios.post('/api/customers/remove', data);
+    return res.data || [];
+  }  
 }

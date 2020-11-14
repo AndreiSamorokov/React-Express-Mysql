@@ -17,17 +17,25 @@ function App() {
   }
 
   const addCustomer = async () => {
-    let res = await customerService.addUser(newCustomer); 
-    const newarr = {
-      id : res.insertId,
-      'name' : newCustomer.name
-    } 
+    let res = await customerService.addUser(newCustomer);  
     getCustomers();
   }
+  
+  const DeleteItem = async (cuid) => { 
+    const del_item = { 'id': cuid }
+    let res = await customerService.removeUser(del_item);  
+    getCustomers();
+  }
+
   const renderCustomer = customer => {
     return (
       <li key={customer.id} className="list__item customer">
         <h3 className="customer__name">{customer.name}</h3> 
+        <button 
+          onClick={() => DeleteItem(customer.id)}
+        >
+          Delete
+        </button>
       </li>
     );
   };

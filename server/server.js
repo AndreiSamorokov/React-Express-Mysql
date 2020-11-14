@@ -42,7 +42,20 @@ app.post(`/api/customers`, async (req, res) => {
             return res.status(200).send(result);
         }
     })
-  })
+})
+
+app.post(`/api/customers/remove`, async (req, res) => { 
+    var user_id = req.body.id 
+    console.log( user_id )
+    connection.query('Delete from customers where id = ?', user_id, function(err, result) {
+        if (err) {
+            return 'error';
+        } else {                  
+            return res.status(200).send(result);
+        }
+    })
+})
+
 
 
 app.listen(port || 8080);

@@ -4,6 +4,11 @@ const path = require('path');
 const app = express();
 const port = 3500
 
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
+
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/ping', function (req, res) {
@@ -27,18 +32,14 @@ connection.query('SELECT * FROM customers ORDER BY id desc',function(err,rows)  
 });
 }); 
 
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(bodyParser.json());
 
 app.post(`/api/customers`, async (req, res) => {
     var user = { name: req.body.name } 
     connection.query('INSERT INTO customers SET ?', user, function(err, result) {
         if (err) {
-            console.error(err);
-        } else {                
-            console.log(res)
+            return 'error';
+        } else {                  
+            return res.status(200).send(result);
         }
     })
   })

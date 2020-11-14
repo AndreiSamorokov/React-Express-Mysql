@@ -18,11 +18,18 @@ function App() {
 
   const addCustomer = async () => {
     let res = await customerService.addUser(newCustomer); 
-    console.log(res);
+    const newarr = {
+      id : res.insertId,
+      'name' : newCustomer.name
+    }
+    console.log( customers )
+    console.log( newarr )
+    // const newcustomers = customers.push( newarr );
+    // setCustomers( newcustomers );
   }
   const renderCustomer = customer => {
     return (
-      <li key={customer.ID} className="list__item customer">
+      <li key={customer.id} className="list__item customer">
         <h3 className="customer__name">{customer.name}</h3> 
       </li>
     );

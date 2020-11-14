@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import customerService from './api/api';
+import './App.css';
 
 function App() {
   const [customers, setCustomers] = useState(null);
@@ -27,11 +28,21 @@ function App() {
     getCustomers();
   }
 
+  const mySubmitHandler = event => {
+    event.preventDefault();
+    addCustomer();
+  };
+
+  const handleChange = e => {
+    setNewCustomer( {'name':e.target.value } );
+  }
+
+
   const renderCustomer = customer => {
     return (
       <li key={customer.id} className="list__item customer">
         <h3 className="customer__name">{customer.name}</h3> 
-        <button 
+        <button className="customer_remove_btn"
           onClick={() => DeleteItem(customer.id)}
         >
           Delete
@@ -41,14 +52,6 @@ function App() {
   };
 
   
-  const mySubmitHandler = event => {
-    event.preventDefault();
-    addCustomer();
-  };
-
-  const handleChange = e => {
-    setNewCustomer( {'name':e.target.value } );
-  }
 
   return (
     <div className="App">

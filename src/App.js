@@ -21,11 +21,8 @@ function App() {
     const newarr = {
       id : res.insertId,
       'name' : newCustomer.name
-    }
-    console.log( customers )
-    console.log( newarr )
-    // const newcustomers = customers.push( newarr );
-    // setCustomers( newcustomers );
+    } 
+    getCustomers();
   }
   const renderCustomer = customer => {
     return (
